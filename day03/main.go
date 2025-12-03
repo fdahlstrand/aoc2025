@@ -55,14 +55,6 @@ func main() {
 	joltage_sum2 := 0
 	for scanner.Scan() {
 		line := scanner.Text()
-		//fmt.Printf("> %s\n", line[0:10])
-		// ix, ch1 := find_max(line, 0, len(line)-1)
-		//_, ch2 := find_max(line, ix+1, len(line))
-		//joltage_str := fmt.Sprintf("%c%c", ch1, ch2)
-		//joltage, err := strconv.Atoi(joltage_str)
-		//check(err, "Failed to convert joltage string")
-
-		//fmt.Printf(">\t%d:%c,%c = %d\n", ix, ch1, ch2, joltage)
 		joltage_sum1 += get_joltage(line, 2)
 		joltage_sum2 += get_joltage(line, 12)
 	}
