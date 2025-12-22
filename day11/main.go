@@ -10,17 +10,6 @@ import (
 
 type Graph map[string][]string
 
-func (G Graph) Reverse() Graph {
-	Grev := make(Graph)
-	for v, _ := range G {
-		for e := range slices.Values(G[v]) {
-			Grev[e] = append(Grev[e], v)
-		}
-	}
-
-	return Grev
-}
-
 func (G Graph) Search(v string, goal string, E map[string]int) int {
 	count := 0
 	for w := range slices.Values(G[v]) {
