@@ -46,10 +46,8 @@ func check(err error, msg string) {
 	}
 }
 
-func main() {
-	fmt.Println("Advent of Code / Day 11")
-
-	file, err := os.Open("./input/input1.txt")
+func part1(path string) {
+	file, err := os.Open(path)
 	check(err, "Failed to open file")
 	defer file.Close()
 
@@ -63,8 +61,37 @@ func main() {
 		G[src] = append(G[src], dst...)
 	}
 
-	G = G.Reverse()
 	E := make(map[string]int)
-	count := G.Search("out", "you", E)
+	count := G.Search("you", "out", E)
 	fmt.Println("1) Paths found", count)
+}
+
+func part2(path string) {
+	file, err := os.Open(path)
+	check(err, "Failed to open file")
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	G := make(Graph)
+	for scanner.Scan() {
+		line := scanner.Text()
+		elements := strings.Split(line, ": ")
+		src := elements[0]
+		dst := strings.Split(elements[1], " ")
+		G[src] = append(G[src], dst...)
+	}
+
+	E := make(map[string]int)
+	a := G.Search("svr", "fft", E)
+	E = make(map[string]int)
+	b := G.Search("fft", "dac", E)
+	E = make(map[string]int)
+	c := G.Search("dac", "out", E)
+	fmt.Println("2) Paths found", a*b*c)
+}
+
+func main() {
+	fmt.Println("Advent of Code / Day 11")
+	part1("./input/input1.txt")
+	part2("./input/input1.txt")
 }
